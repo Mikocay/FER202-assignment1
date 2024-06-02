@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 const pages = [
     { page: 'Home', link: '/' },
-    { page: 'Dashboard', link: '/login' }
+    { page: 'Dashboard', link: '/authenticated' }
 ];
 
 function ResponsiveAppBar() {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -13,7 +13,9 @@ import '../styles/dashboard.css';
 
 const URL = COURSES_API;
 
-const Dashboard = () => {
+const Dashboard = ({ onLogout }: any) => {
+
+    const navigate = useNavigate();
 
     const [courses, setcourses] = useState<any[]>([]);
 
@@ -51,9 +53,26 @@ const Dashboard = () => {
         setOpen(false);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        navigate('/');
+        onLogout();
+    };
+
     return (
         <div className="staff-table">
             <div className="btn-add">
+                <Button
+                    onClick={handleLogout}
+                    sx={{
+                        mr: 1,
+                        backgroundColor: '#1976D2',
+                        color: 'white',
+                        ":hover": {
+                            backgroundColor: '#fff',
+                            color: '#1976D2',
+                        }
+                    }} >Logout</Button>
                 <Link to={'/add/'}>
                     <Button sx={{
                         backgroundColor: '#1976D2',
